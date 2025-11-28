@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
 
     <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,303 +10,319 @@
     <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
         rel="stylesheet"> -->
 
-
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+      @import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
 
-        /* css reset */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+      /* css reset */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
 
-        ul {
-            list-style: none;
-        }
+      ul {
+        list-style: none;
+      }
 
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
 
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6 {
-            font-size: inherit;
-            font-weight: inherit;
-        }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-size: inherit;
+        font-weight: inherit;
+      }
 
-        * {
-            /* background-color: rgba(255, 0, 0, 0.1); */
-        }
+      .track {
+        border: 1px solid red;
+      }
 
-        .track {
-            border: 1px solid red;
-        }
+      /* end - css reset */
 
-        /* end - css reset */
+      body {
+        font-family: "Rubik", sans-serif;
+        color: #444444;
+      }
 
-        body {
-            font-family: "Rubik", sans-serif;
-            color: #444444;
-        }
+      .text-dark {
+        color: #0b132a;
+      }
 
-        .text-dark {
-            color: #0B132A;
-        }
+      .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+        max-width: 640px;
+        margin-left: auto;
+        margin-right: auto;
+      }
 
+      header nav {
+        justify-content: space-between;
+        margin-top: 1.5rem;
+        display: flex;
+      }
+
+      header .logo {
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .sidebar {
+        padding: 2rem;
+        position: fixed;
+        background-color: purple;
+        color: white;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        display: none;
+      }
+
+      .sidebar.active {
+        display: block;
+      }
+
+      #close-icon {
+        position: absolute;
+        top: 0.5rem;
+        left: 0.5rem;
+      }
+
+      nav .buttons {
+        flex-direction: column;
+        display: flex;
+      }
+
+      .banner {
+        margin-top: 4rem;
+        display: flex;
+        flex-direction: column;
+      }
+
+      h1 {
+        margin-top: 2rem;
+        font-weight: 500;
+        margin-bottom: 0.55rem;
+      }
+
+      .banner p {
+        margin-bottom: 1.5rem;
+      }
+
+      .banner img {
+        max-width: 100%;
+      }
+
+      .button {
+        background-color: #f54747;
+        outline: none;
+        color: white;
+        padding: 17px 78px 17px 78px;
+        padding: 0.6rem 3rem;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .button:hover {
+        box-shadow: 30px 24px 54px 0 rgba(245, 56, 56, 0.5);
+      }
+
+      .pricing {
+        margin-top: 4rem;
+        text-align: center;
+      }
+
+      /* tablet 768px and above */
+      @media (min-width: 768px) {
         .container {
-            padding-left: 1rem;
-            padding-right: 1rem;
-            max-width: 640px;
-            margin-left: auto;
-            margin-right: auto;
+          max-width: 768px;
         }
 
         header nav {
-            justify-content: space-between;
-            margin-top: 1.5rem;
-            display: flex;
-
-        }
-
-        header .logo {
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: .5rem;
-        }
-
-        .sidebar {
-            padding: 2rem;
-            position: fixed;
-            background-color: purple;
-            color: white;
-            top: 0;
-            bottom: 0;
-            right: 0;
-            display: none;
-        }
-
-        .sidebar.active {
-            display: block;
-        }
-
-        #close-icon {
-            position: absolute;
-            top: .5rem;
-            left: .5rem
-        }
-
-
-        nav .buttons {
-            flex-direction: column;
-            display: flex;
-        }
-
-        .banner {
-            margin-top: 4rem;
-            display: flex;
-            flex-direction: column;
-        }
-
-        h1 {
-            margin-top: 2rem;
-            font-weight: 500;
-            margin-bottom: 0.55rem;
-
-        }
-
-        .banner p {
-            margin-bottom: 1.5rem;
-        }
-
-        .banner img {
-            max-width: 100%;
+          margin-top: 2rem;
         }
 
         .button {
-            background-color: #F54747;
-            outline: none;
-            color: white;
-            padding: 17px 78px 17px 78px;
-            padding: 0.6rem 3rem;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+          border-radius: 10px;
+          padding: 0.75rem 3.35rem;
+        }
+      }
 
+      /* small laptop 1024 and above */
+      @media (min-width: 1024px) {
+        .button {
+          padding: 0.85rem 4.05rem;
         }
 
-        .button:hover {
-            box-shadow: 30px 24px 54px 0 rgba(245, 56, 56, .5);
-
+        .container {
+          max-width: 1024px;
         }
 
-        .pricing {
-
-            margin-top: 4rem;
-            text-align: center;
+        header nav {
+          margin-top: 2.5rem;
         }
 
-
-        /* tablet 768px and above */
-        @media(min-width:768px) {
-            .container {
-                max-width: 768px;
-            }
-
-            header nav {
-                margin-top: 2rem;
-            }
-
-            .button {
-                border-radius: 10px;
-                padding: 0.75rem 3.35rem;
-
-            }
-
+        header nav svg {
+          display: none;
         }
 
-        /* small laptop 1024 and above */
-        @media (min-width:1024px) {
-
-            .button {
-                padding: 0.85rem 4.05rem;
-
-            }
-
-            .container {
-                max-width: 1024px;
-            }
-
-            header nav {
-                margin-top: 2.5rem;
-            }
-
-            header nav svg {
-                display: none;
-            }
-
-            .sidebar {
-                position: static;
-                display: flex;
-                flex-grow: 1;
-                justify-content: space-between;
-                background-color: transparent;
-                color: inherit;
-                padding: 0;
-                align-items: center;
-            }
-
-            #close-icon {
-                display: none;
-            }
-
-            header nav .links {
-                display: flex;
-                gap: 1rem;
-                flex-grow: 1;
-                justify-content: center;
-
-            }
-
-            header nav .links a:hover {
-                color: red;
-            }
-
-
-            nav .buttons {
-                display: flex;
-                flex-direction: row;
-                gap: 1rem;
-
-            }
-
-            .banner {
-                flex-direction: row-reverse;
-                justify-content: space-between;
-            }
+        .sidebar {
+          position: static;
+          display: flex;
+          flex-grow: 1;
+          justify-content: space-between;
+          background-color: transparent;
+          color: inherit;
+          padding: 0;
+          align-items: center;
         }
 
-        /* medium laptops 1280 and above */
-        @media(min-width:1280px) {
-            .button {
-                padding: 1.05rem 4.85rem;
-            }
-
-            .container {
-                max-width: 1280px;
-            }
-
-            header nav {
-                margin-top: 3rem
-            }
-
+        #close-icon {
+          display: none;
         }
 
-        /*  */
-        @media(min-width:1536px) {
-            .container {
-                max-width: 1536px;
-            }
+        header nav .links {
+          display: flex;
+          gap: 1rem;
+          flex-grow: 1;
+          justify-content: center;
         }
+
+        header nav .links a:hover {
+          color: red;
+        }
+
+        nav .buttons {
+          display: flex;
+          flex-direction: row;
+          gap: 1rem;
+        }
+
+        .banner {
+          flex-direction: row-reverse;
+          justify-content: space-between;
+        }
+      }
+
+      /* medium laptops 1280 and above */
+      @media (min-width: 1280px) {
+        .button {
+          padding: 1.05rem 4.85rem;
+        }
+
+        .container {
+          max-width: 1280px;
+        }
+
+        header nav {
+          margin-top: 3rem;
+        }
+      }
+
+      /*  */
+      @media (min-width: 1536px) {
+        .container {
+          max-width: 1536px;
+        }
+      }
+      /* desktop sign-in + sign-up style */
+      nav .buttons a {
+        font-weight: 500;
+        font-size: 14px;
+      }
+
+      /* sign in text */
+      nav .buttons a:first-child {
+        color: #0b132a;
+      }
+
+      /* sign up outlined red button */
+      .button--transparent {
+        border: 1px solid #f53855;
+        padding: 8px 25px;
+        border-radius: 50px;
+        color: #f53855;
+        transition: 0.3s;
+      }
+
+      .button--transparent:hover {
+        background-color: #f53855;
+        color: white;
+      }
     </style>
-</head>
+  </head>
 
-<body>
-
+  <body>
     <header>
-        <nav class="container">
-            <div class="logo text-dark">
-                <img src="./Standard Collection 27logo.svg" alt="logo">
-                <a>Lasles VPN</a>
-            </div>
+      <nav class="container">
+        <div class="logo text-dark">
+          <img src="./Standard Collection 27logo.svg" alt="logo" />
+          <a>Lasles VPN</a>
+        </div>
 
-            <svg id="menu" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                class="icon icon-tabler icons-tabler-outline icon-tabler-menu-2">
-                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                <path d="M4 6l16 0" />
-                <path d="M4 12l16 0" />
-                <path d="M4 18l16 0" />
-            </svg>
-            <div class="sidebar" id="sidebar">
-                <button id="close-icon">X</button>
-                <ul class="links">
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">features</a></li>
-                    <li><a href="#">blog</a></li>
-                    <li><a href="#">testimonials</a></li>
-                    <li><a href="#">help</a></li>
-                </ul>
-                <div class="buttons">
-                    <a href="./login.html">sign In</a>
-                    <a href="#" class="button--transparent">sign Up</a>
-                </div>
-            </div>
-        </nav>
+        <svg
+          id="menu"
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="icon icon-tabler icons-tabler-outline icon-tabler-menu-2"
+        >
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <path d="M4 6l16 0" />
+          <path d="M4 12l16 0" />
+          <path d="M4 18l16 0" />
+        </svg>
+        <div class="sidebar" id="sidebar">
+          <button id="close-icon">X</button>
+          <ul class="links">
+            <li><a href="#">About</a></li>
+            <li><a href="#">features</a></li>
+            <li><a href="#">blog</a></li>
+            <li><a href="#">testimonials</a></li>
+            <li><a href="#">help</a></li>
+          </ul>
+          <div class="buttons">
+            <a href="./login.html">sign In</a>
+            <a href="#" class="button--transparent">sign Up</a>
+          </div>
+        </div>
+      </nav>
     </header>
     <section class="banner container">
-        <img src="./Illustration 1.svg" alt="">
-        <div>
-            <h1>
-                Want anything to be easy with LaslesVPN.
-            </h1>
-            <p>Provide a network for all your needs with ease and fun using LaslesVPN discover interesting fheatures
-                from us.</p>
-            <button class="button">Get Started</button>
-        </div>
+      <img src="./Illustration 1.svg" alt="" />
+      <div>
+        <h1>Want anything to be easy with LaslesVPN.</h1>
+        <p>
+          Provide a network for all your needs with ease and fun using LaslesVPN
+          discover interesting fheatures from us.
+        </p>
+        <button class="button">Get Started</button>
+      </div>
     </section>
 
     <section class="container pricing">
-        <h2>pricing section</h2>
-        <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo ipsa eveniet dolorem fugit sit harum quibusdam
-            pariatur, magnam inventore voluptatibus molestias, repudiandae est modi? Asperiores deleniti odit tempora
-            exercitationem commodi.</p>
+      <h2>pricing section</h2>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo ipsa
+        eveniet dolorem fugit sit harum quibusdam pariatur, magnam inventore
+        voluptatibus molestias, repudiandae est modi? Asperiores deleniti odit
+        tempora exercitationem commodi.
+      </p>
     </section>
 
     <br />
@@ -316,18 +331,14 @@
     <br />
     <br />
 
-
     <script>
-        document.getElementById('menu').addEventListener('click', () => {
-            document.getElementById("sidebar").classList.toggle("active")
-        })
+      document.getElementById("menu").addEventListener("click", () => {
+        document.getElementById("sidebar").classList.toggle("active");
+      });
 
-        document.getElementById('close-icon').addEventListener('click', () => {
-            document.querySelector("#sidebar").classList.toggle("active")
-
-        })
+      document.getElementById("close-icon").addEventListener("click", () => {
+        document.querySelector("#sidebar").classList.toggle("active");
+      });
     </script>
-
-</body>
-
+  </body>
 </html>
