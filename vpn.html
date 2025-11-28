@@ -50,6 +50,21 @@
         }
 
         /* end - css reset */
+        .backdrop.active {
+            display: block;
+            top: 0;
+            left: 0;
+            position: fixed;
+            height: 100vh;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            z-index: 1;
+
+        }
+
+        .backdrop {
+            display: none;
+        }
 
         body {
             font-family: "Rubik", sans-serif;
@@ -95,6 +110,7 @@
 
         .sidebar.active {
             display: block;
+            z-index: 999;
         }
 
         #close-icon {
@@ -259,7 +275,7 @@
 </head>
 
 <body>
-
+    <div class="backdrop"></div>
     <header>
         <nav class="container">
             <div class="logo text-dark">
@@ -319,12 +335,19 @@
 
     <script>
         document.getElementById('menu').addEventListener('click', () => {
-            document.getElementById("sidebar").classList.toggle("active")
+            document.getElementById("sidebar").classList.toggle("active");
+            document.querySelector(".backdrop").classList.toggle("active");
         })
 
         document.getElementById('close-icon').addEventListener('click', () => {
             document.querySelector("#sidebar").classList.toggle("active")
+            document.querySelector(".backdrop").classList.toggle("active");
 
+        })
+        let backdrop = document.querySelector(".backdrop");
+        backdrop.addEventListener("click",()=>{
+            document.querySelector("#sidebar").classList.remove("active")
+            document.querySelector(".backdrop").classList.remove("active");
         })
     </script>
 
