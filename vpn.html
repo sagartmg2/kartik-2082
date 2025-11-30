@@ -32,7 +32,7 @@
         }
 
 
-        section{
+        /* section{
 
 
         }
@@ -41,7 +41,7 @@
 
 
 
-        }
+        } */
 
 
         h1,
@@ -54,15 +54,30 @@
             font-weight: inherit;
         }
 
-        /* end - css reset */
-
-        * {
-            /* background-color: rgba(255, 0, 0, 0.1); */
-        }
+        /* * {
+            background-color: rgba(255, 0, 0, 0.1);
+        } */
 
         .track {
             border: 1px solid red;
             background-color: rgba(245, 56, 56, .5)
+        }
+
+        /* end - css reset */
+        .backdrop.active {
+            display: block;
+            top: 0;
+            left: 0;
+            position: fixed;
+            height: 100vh;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            z-index: 1;
+
+        }
+
+        .backdrop {
+            display: none;
         }
 
         body {
@@ -110,6 +125,7 @@
 
         .sidebar.active {
             display: block;
+            z-index: 999;
         }
 
         #close-icon {
@@ -283,6 +299,7 @@
 </head>
 
 <body>
+    <div class="backdrop"></div>
     <header>
         <nav class="container">
             <div class="logo text-dark">
@@ -342,12 +359,19 @@
 
     <script>
         document.getElementById('menu').addEventListener('click', () => {
-            document.getElementById("sidebar").classList.toggle("active")
+            document.getElementById("sidebar").classList.toggle("active");
+            document.querySelector(".backdrop").classList.toggle("active");
         })
 
         document.getElementById('close-icon').addEventListener('click', () => {
             document.querySelector("#sidebar").classList.toggle("active")
+            document.querySelector(".backdrop").classList.toggle("active");
 
+        })
+        let backdrop = document.querySelector(".backdrop");
+        backdrop.addEventListener("click",()=>{
+            document.querySelector("#sidebar").classList.remove("active")
+            document.querySelector(".backdrop").classList.remove("active");
         })
     </script>
 
