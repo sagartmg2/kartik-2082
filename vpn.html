@@ -165,6 +165,15 @@
             text-align: center;
         }
 
+        .pricing h2{
+            font-weight: bold;
+        }
+
+        .pricing .description{
+            margin-top: 1rem;
+            text-align: justify;
+        }
+
 
         /* tablet 768px and above */
         @media(min-width:768px) {
@@ -271,7 +280,6 @@
 </head>
 
 <body>
-
     <header>
         <nav class="container">
             <div class="logo text-dark">
@@ -317,7 +325,7 @@
 
     <section class="container pricing">
         <h2>pricing section</h2>
-        <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo ipsa eveniet dolorem fugit sit harum quibusdam
+        <p class="description"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo ipsa eveniet dolorem fugit sit harum quibusdam
             pariatur, magnam inventore voluptatibus molestias, repudiandae est modi? Asperiores deleniti odit tempora
             exercitationem commodi.</p>
     </section>
@@ -327,7 +335,6 @@
     <br />
     <br />
     <br />
-
 
     <script>
         document.getElementById('menu').addEventListener('click', () => {
