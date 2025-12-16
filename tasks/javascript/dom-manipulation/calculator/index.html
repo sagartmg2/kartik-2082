@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Caluclator app</h1>
+    <pre>
+        Hint
+            - create three input fileds
+            - first number
+            - dropdown to choose the operator ( add ,multiple ,...other arthematic operators)
+            - second number
+
+        have a calculate button and on click of it, it the result should be printed in screen
+
+        Hint
+            - to change content of html , we have to do dom manipulation
+            make use of
+            - document.getElementById
+            - &lt;element&gt;.innerHTML
+    </pre>
+
+
+    <div>
+        <p>
+            result : <span id="result"></span>
+        </p>
+        <form onsubmit="calculate(event)">
+            <input type="number" id="first" name="input1" required>
+            <select id="operator" name="operator">
+                <option value="">select</option>
+                <option value="plus">+</option>
+                <option value="substract">-</option>
+                <option value="multiply">x</option>
+            </select>
+            <input type="number" id="second" name="input2" required>
+            <input type="submit" value="calucate">
+        </form>
+
+
+    </div>
+
+    <script>
+
+        /* function calculate(e) {
+            e.preventDefault();
+
+            console.log(e.target)
+            console.log(e.target.input1)
+            console.log(e.target.operator)
+            console.log(e.target.operator.value)
+            console.log(e.target.input2)
+
+            let input1 = parseFloat(document.getElementById('first').value)
+            let input2 = parseFloat(document.getElementById('second').value)
+
+            let result;
+
+            let operator = document.getElementById('operator').value
+
+            if (operator == 'plus') {
+                result = input1 + input2
+            } else if (operator == "substract") {
+                result = input1 - input2
+            } else if (operator == "multiply") {
+                result = input1 * input2
+            }
+
+            document.getElementById('result').innerText = result
+
+
+        } */
+
+
+        const calculate = (e) => {
+            e.preventDefault();
+            let input1 = parseFloat(e.target.input1.value)
+            let input2 = parseFloat(e.target.input2.value)
+
+            let result;
+
+            let operator = e.target.operator.value
+
+            // if (operator == 'plus') {
+            //     result = input1 + input2
+            // } else if (operator == "substract") {
+            //     result = input1 - input2
+            // } else if (operator == "multiply") {
+            //     result = input1 * input2
+            // }
+
+            switch (operator) {
+                case 'plus':
+                    result = input1 + input2
+                    break;
+
+                case 'substract': {
+                    result = input1 - input2
+                    break;
+                }
+                case 'multiply': {
+                    result = input1 * input2
+                    break;
+                }
+                default: {
+                    result = 'please choose an operator first'
+                }
+            }
+
+            document.getElementById('result').innerText = result
+        }
+
+    </script>
+
+</body>
+
+</html>
