@@ -54,6 +54,22 @@
 
          */
 
+        let prevColorIndex = 1
+        const changeColor = () => {
+
+
+            let colors = ["red", "orange", "purple"]
+            let randomColorIndex = Math.floor(Math.random() * colors.length)
+
+            console.log("inside change color", randomColorIndex);
+            if (prevColorIndex == randomColorIndex) {
+                return changeColor()  
+            }
+
+            prevColorIndex = randomColorIndex
+            document.body.style.backgroundColor = colors[randomColorIndex]
+        }
+
     </script>
 </body>
 

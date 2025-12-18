@@ -8,10 +8,27 @@
     <title>Document</title>
 
     <style>
+        .dark-theme {
+            background-color: black;
+            color: white
+        }
+
+        .dark-theme #btn-dark {
+            display: none;
+        }
+
+        #btn-light {
+            display: none;
+        }
+
+        .dark-theme #btn-light {
+            display: inline-block;
+            display: initial;
+        }
     </style>
 </head>
 
-<body id="body">
+<body id="body" class="">
 
 
     <pre>
@@ -20,8 +37,8 @@
         and if it is dark theme, the button-dark theme should not be displayed. 
     </pre>
 
-    <button id="btn-dark" onclick="">dark theme</button>
-    <button id="btn-light" onclick="">light theme</button>
+    <button id="btn-dark" onclick="changeTheme()">dark theme</button>
+    <button id="btn-light" onclick="changeTheme()">light theme</button>
 
     <p>
         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Numquam, illum in eos porro, neque nulla,
@@ -30,7 +47,7 @@
         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Numquam, illum in eos porro, neque nulla,
         exercitationem repudiandae fugit qui eum consequatur nostrum ad. Ea rem ipsam repellendus reiciendis dolores
         officiis!
-       
+
     </p>
     <p>
         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Numquam, illum in eos porro, neque nulla,
@@ -39,7 +56,7 @@
         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Numquam, illum in eos porro, neque nulla,
         exercitationem repudiandae fugit qui eum consequatur nostrum ad. Ea rem ipsam repellendus reiciendis dolores
         officiis!
-       
+
     </p>
     <p>
         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Numquam, illum in eos porro, neque nulla,
@@ -48,8 +65,26 @@
         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Numquam, illum in eos porro, neque nulla,
         exercitationem repudiandae fugit qui eum consequatur nostrum ad. Ea rem ipsam repellendus reiciendis dolores
         officiis!
-       
+
     </p>
+
+    <script>
+        const darkTheme = () => {
+            document.body.classList.add('dark-theme')
+        }
+
+        const lightTheme = () => {
+            document.body.classList.remove('dark-theme')
+        }
+
+
+
+        const changeTheme = () => {
+            document.body.classList.toggle('dark-theme')
+        }
+
+
+    </script>
 
 </body>
 
