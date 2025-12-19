@@ -44,9 +44,14 @@
         on page refresh the added shopping list gets deleted, prevent that. 
     </pre>
 
-    <input placeholder="item">
-    <input placeholder="quanity">
-    <input type="submit">
+
+    <form id="shopping-list-form" onsubmit="addItem(event)">
+        <input placeholder="item" name="item" value="apple">
+        <input placeholder="quantity" name="quantity" value="13">
+        <!-- <input type="submit" id="submit-btn" onclick="addNewItem(myValue)"> -->
+        <!-- <input type="submit"> -->
+        <button>submit</button>
+    </form>
 
     <table>
         <thead>
@@ -56,20 +61,73 @@
                 <th>Action</th>
             </tr>
         </thead>
-        <tbody>
-            <tr>
+        <tbody id="form-body">
+            <!-- <tr>
                 <td>apple</td>
                 <td>11</td>
                 <td><button>delete</button></td>
             </tr>
-            <tr>
+            <t>
                 <td>samsung</td>
                 <td>9</td>
                 <td><button>delete</button></td>
-            </tr>
-            samsung 9
+                </tr> -->
         </tbody>
     </table>
+    <script>
+        // document.getElementById('submit-btn').addEventListener('click', addItem)
+        // document.getElementById('shopping-list-form').addEventListener('submit', addItem)
+        // function addNewItem(index) {
+        //     console.log(index);
+        // }
+
+        let items = []  // [{item: 'apple', quantity: '12'},{item: 'kiwi', quantity: '12'}]
+        const addItem = (e) => {
+            e.preventDefault();
+            let item = e.target.item.value;
+            let quantity = e.target.quantity.value;
+
+            if (!item || !quantity) {
+                alert("requried...")
+                return;
+            }
+
+            items.push({
+                item: item,
+                quantity
+            })
+
+            e.target.item.value = ''
+            e.target.quantity.value = ''
+
+            displayItems()
+        }
+
+        const deleteItem = (index) => {
+            console.log(index);
+            // items.splice(index, 1)
+            items = items.filter((el, idx) => index != idx)
+            displayItems()
+        }
+
+        function displayItems() {
+            let itemsRows = "";
+            items.forEach((el, index) => {
+                itemsRows += `
+                <tr>
+                    <td>${el.item}</td>
+                    <td>${el.quantity}</td>
+                    <td><button onclick="deleteItem(${index})">delete</button></td>
+                </tr>
+                `
+            })
+
+            document.getElementById('form-body').innerHTML = itemsRows
+        }
+
+
+    </script>
+
 </body>
 
 </html>
