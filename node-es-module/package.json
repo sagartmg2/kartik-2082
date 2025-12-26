@@ -10,3 +10,9 @@
     "nodemon": "^3.1.11"
   }
 }
+
+
+   modified:   src/App.css
+        modified:   src/App.jsx
+        modified:   src/Home.jsx
+        modified:   src/main.jsx
