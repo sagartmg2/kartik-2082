@@ -204,14 +204,15 @@ const Home = () => {
       <div className="courses">
         {courses
           .filter((el) => !el.status)
-          .map((el) => <CourseItem
-                name={el.name}
-                description={el.description}
-                status={el.status}
-                image={el.image}
-                duration={el.duration}
-              />
-          )}
+          .map((el) => (
+            <CourseItem
+              name={el.name}
+              description={el.description}
+              status={el.status}
+              image={el.image}
+              duration={el.duration}
+            />
+          ))}
       </div>
 
       <br />

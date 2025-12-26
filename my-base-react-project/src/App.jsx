@@ -1,5 +1,6 @@
 import Home from "./Home";
 import "./App.css";
+import { Tabs } from "./Tabs";
 
 // export default function App() {
 //   return (
@@ -23,7 +24,8 @@ export const App = () => {
   return (
     <div>
       {/* routing */}
-      <Home />
+      {/* <Home /> */}
+      <Tabs/>
     </div>
   );
 };
