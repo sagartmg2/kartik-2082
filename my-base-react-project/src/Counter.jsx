@@ -10,12 +10,19 @@ import { Fragment, useState } from "react";
 */
 
 const Counter = () => {
-  const [count, setCount] = useState(100);   // [ 100 ,modifierFunction]
+  const [count, setCount] = useState(100); // [ 100 ,modifierFunction]
 
   const increment = () => {
     // setCount(++count);  // ERROR: we must not chnge state value directly.
-    setCount(count + 1);
-    console.log("incrmeented.....", count); 
+    // setCount(count + 1);
+    // setCount(count + 1);
+    // setCount(count + 1);
+    
+    setCount((prev) => prev + 1);
+    setCount((prev) => prev + 1);
+    setCount((prev) => prev + 1);
+
+    console.log("incrmeented.....", count);
   };
 
   const decrement = () => {
@@ -24,9 +31,9 @@ const Counter = () => {
     console.log("decrement.....", count);
   };
 
-  const reset = () =>{
-    setCount(0)
-  }
+  const reset = () => {
+    setCount(0);
+  };
 
   console.log("counter component rendered.");
   return (

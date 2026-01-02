@@ -66,7 +66,7 @@ export const Todo = () => {
         <tbody>
           {todos.map((el, index) => {
             return (
-              <tr key={index}>
+            <tr key={index}>
                 <td>{el.title}</td>
                 <td>{el.status ? "Yes" : "No"}</td>
                 <td>
