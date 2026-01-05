@@ -1,13 +1,6 @@
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
-
-import { useEffect, useState } from "react";
-/* 
-  life-cycle of react components
-    - componentDidMount
-    - componentDidUpdate
-    - componentDidUnmount
-*/
+import { useState } from "react";
 
 import Button from "./components/Button";
 
@@ -33,24 +26,16 @@ export const TodosApi = () => {
       .catch((err) => {
         console.log("something went wrong");
         setIsLoading(false);
-        toast.error("Something went wrong. Please try again.", {
-          theme: "colored",
-        });
+        toast.error('Something went wrong. Please try again.',{
+          theme:"colored"
+        })
       });
   };
-
-  // useEffect(() => {
-  //   fetchTodos();
-  // }, <dependency-arry>);
-
-  useEffect(() => {
-    fetchTodos();
-  }, []);
 
   return (
     <>
       <ToastContainer />
-
+      
       <Button
         isDisabled={isLoading}
         title="fetch todos"

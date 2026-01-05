@@ -1,9 +1,9 @@
-const Button = ({ title, onClickFn }) => {
+const Button = ({ isDisabled, title, onClickFn }) => {
   return (
     <button
-      disabled
+      disabled={isDisabled}
       onClick={onClickFn}
-      className=" disabled:bg-gray-300 border px-4 py-2 rounded hover:bg-red-600 hover:text-white hover:border-red-600 cursor-pointer"
+      className="disabled:bg-gray-200 border px-4 py-2 rounded hover:bg-red-600 hover:text-white hover:border-red-600 cursor-pointer"
     >
       {title}
     </button>
