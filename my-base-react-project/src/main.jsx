@@ -3,14 +3,18 @@ import { createRoot } from "react-dom/client";
 // import Application from "./App";
 import { App } from "./App";
 
+import { BrowserRouter } from "react-router";
+
 createRoot(document.getElementById("root")).render(
   <>
     {/* <StrictMode> */}
-      {/* <Application /> */}
+    {/* <Application /> */}
+    {/* <BrowserRouter> */}
       <App />
-      {/* context  */}
-      {/* redux  */}
-      {/* provider  */}
+    {/* </BrowserRouter> */}
+    {/* context  */}
+    {/* redux  */}
+    {/* provider  */}
     {/* </StrictMode> */}
   </>
 );

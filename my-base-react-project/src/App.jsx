@@ -8,25 +8,33 @@ import Header from "./Header";
 import { useContext, useState } from "react";
 import { TodosApi } from "./TodosApi";
 import Products from "./Products";
-// export default function App() {
-//   return (
-//     <div>
-//       <Home />
-//     </div>
-//   );
-// }
 
-// const App = () => {
-//   return (
-//     <div>
-//       <Home />
-//     </div>
-//   );
-// };
-
-// export default App;
+import { createBrowserRouter, RouterProvider } from "react-router";
+import RootLayout from "./RootLayout";
 
 export const App = () => {
+  let router = createBrowserRouter([
+    {
+      path: "/",
+      Component: RootLayout,
+      children: [
+        {
+          path: "",
+          Component: Products,
+        },
+        {
+          path: "todos",
+          Component: TodosApi,
+        },
+        {
+          path: "counter",
+          Component: Counter,
+        },
+      ],
+    },
+    
+  ]);
+
   console.log("app render");
 
   const [theme, setTheme] = useState("theme");
@@ -42,6 +50,12 @@ export const App = () => {
   };
 
   return (
+    <>
+      <RouterProvider router={router} />;
+    </>
+  );
+
+  return (
     // <div className="app bg-amber-950  text-white min-h-screen">
     <div
       className={`app min-h-screen ${
@@ -51,14 +65,14 @@ export const App = () => {
       {/* routing */}
       {/* <Home /> */}
       {/* <Tabs/> */}
-      
+
       {/* <Todo /> */}
       {/* <Counter /> */}
 
       {/* <Theme theme={theme} changeTheme={changeTheme} /> */}
       <div className="m-8">
         {/* <TodosApi /> */}
-        <Products/>
+        <Products />
       </div>
     </div>
   );
