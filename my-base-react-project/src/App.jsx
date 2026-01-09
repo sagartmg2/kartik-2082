@@ -19,6 +19,10 @@ import {
 import RootLayout from "./RootLayout";
 import Todos from "./pages/Todos";
 import ProductView from "./ProductView";
+import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
+import Setting from "./pages/Setting";
+import ProtectedRoute from "./ProtectedRoute";
 
 export const App = () => {
   let router = createBrowserRouter([
@@ -33,6 +37,10 @@ export const App = () => {
         {
           path: "todos",
           Component: Todos,
+        },
+        {
+          path: "login",
+          Component: Login,
         },
         {
           path: "products",
@@ -50,6 +58,19 @@ export const App = () => {
         {
           path: "counter",
           Component: Counter,
+        },
+        {
+          Component: ProtectedRoute,
+          children: [
+            {
+              path: "dashboard",
+              Component: Dashboard,
+            },
+            {
+              path: "setting",
+              Component: Setting,
+            },
+          ],
         },
       ],
     },
