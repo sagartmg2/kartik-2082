@@ -5,7 +5,7 @@ import Counter from "./Counter";
 import { Todo } from "./Todo";
 import { Theme } from "./Theme";
 import Header from "./Header";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { TodosApi } from "./TodosApi";
 import Products from "./Products";
 
@@ -23,12 +23,17 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Setting from "./pages/Setting";
 import ProtectedRoute from "./ProtectedRoute";
+import axios from "axios";
 
 export const App = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
   let router = createBrowserRouter([
     {
       path: "",
-      Component: RootLayout,
+      // Component: RootLayout ,
+      element: <RootLayout isLoggedIn={isLoggedIn} />,
       children: [
         {
           path: "",
@@ -36,11 +41,12 @@ export const App = () => {
         },
         {
           path: "todos",
-          Component: Todos,
+          Component: Todo,
         },
         {
           path: "login",
-          Component: Login,
+          // Component: Login,
+          element: <Login setIsLoggedIn={setIsLoggedIn} />,
         },
         {
           path: "products",
@@ -60,7 +66,8 @@ export const App = () => {
           Component: Counter,
         },
         {
-          Component: ProtectedRoute,
+          // Component: ProtectedRoute,
+          element: <ProtectedRoute isLoggedIn={isLoggedIn} />,
           children: [
             {
               path: "dashboard",
@@ -89,6 +96,24 @@ export const App = () => {
       setTheme("light");
     }
   };
+
+  useEffect(() => {
+    let accessToken = localStorage.getItem("accessToken");
+
+    axios
+      .get("https://dummyjson.com/auth/me", {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
+      .then((res) => {
+        setIsLoggedIn(true);
+        setIsLoading(false);
+      })
+      .catch((res) => {
+        setIsLoading(false);
+      });
+  }, []);
 
   return (
     <>

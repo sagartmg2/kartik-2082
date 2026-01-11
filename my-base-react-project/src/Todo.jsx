@@ -1,13 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const Todo = () => {
-  const [todos, setTodos] = useState([
-    { title: "one", status: false },
-    { title: "two", status: false },
-    { title: "three", status: true },
-  ]);
-
+  const [todos, setTodos] = useState([]);
   const [editableTodoIndex, setEditableTodoIndex] = useState(null);
+  const [pageLoaded, setPageLoaded] = useState(false);
 
   const addNewItem = (e) => {
     e.preventDefault();
@@ -43,6 +39,26 @@ export const Todo = () => {
     setEditableTodoIndex(null);
   };
 
+  useEffect(() => {
+    if (pageLoaded) {
+      localStorage.setItem("todos", JSON.stringify(todos));
+    }
+  }, [todos]);
+
+  useEffect(() => {
+    let stringifiedTodos = localStorage.getItem("todos");
+    let todos = JSON.parse(stringifiedTodos);
+
+    if (todos) {
+      // [] {}
+      setTodos(todos);
+    }
+
+    setPageLoaded(true);
+  }, []);
+
+  console.log({ todos });
+
   return (
     <>
       <form className="flex items-center gap-4" onSubmit={addNewItem}>
@@ -64,9 +80,9 @@ export const Todo = () => {
           </tr>
         </thead>
         <tbody>
-          {todos.map((el, index) => {
+          {todos?.map((el, index) => {
             return (
-            <tr key={index}>
+              <tr key={index}>
                 <td>{el.title}</td>
                 <td>{el.status ? "Yes" : "No"}</td>
                 <td>

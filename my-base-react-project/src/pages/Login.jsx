@@ -4,7 +4,7 @@ import { FaRegEyeSlash } from "react-icons/fa";
 import Button from "../components/Button";
 import axios from "axios";
 import { useNavigate } from "react-router";
-export default function Login() {
+export default function Login({ setIsLoggedIn }) {
   const navigate = useNavigate();
   //  showPassowrd usestate
 
@@ -53,13 +53,18 @@ export default function Login() {
     e.preventDefault();
 
     axios
-      .post("https://dummyjson.com/auth/login", {
-        username: "emilys",
-        password: "emilyspass",
-        expiresInMins: 30,
-      })
+      .post(
+        "https://dummyjson.com/auth/login",
+        {
+          username: "emilys",
+          password: "emilyspass",
+          expiresInMins: 30,
+        },
+        {}
+      )
       .then((res) => {
         console.log(res.data.accessToken);
+        setIsLoggedIn(true);
         localStorage.setItem("accessToken", res.data.accessToken);
         navigate("/dashboard");
       })

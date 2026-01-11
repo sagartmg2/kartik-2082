@@ -2,10 +2,10 @@ import { Outlet } from "react-router";
 import Header from "./Header";
 import Footer from "./Footer";
 
-const RootLayout = () => {
+const RootLayout = ({ isLoggedIn }) => {
   return (
     <>
-      <Header />
+      <Header isLoggedIn={isLoggedIn} />
       <div className="min-h-164 mx-8">
         <Outlet />
       </div>
