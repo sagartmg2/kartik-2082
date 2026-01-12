@@ -1,19 +1,16 @@
 import { useState } from "react";
 import { FaMoon } from "react-icons/fa";
 import { LuSun } from "react-icons/lu";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router";
+import { logout } from "./redux/slice/userSlice";
 
-export default function Header({
-  isLoggedIn,
-  theme,
-  changeTheme,
-  setIsLoggedIn,
-}) {
-  // const location  = useLocation();
-  // pathname = location.pathname
+export default function Header({ theme, changeTheme }) {
+  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
 
   const { pathname } = useLocation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   return (
     <header className={`flex items-center mb-12 p-12 `}>
@@ -52,11 +49,12 @@ export default function Header({
       </button>
       &nbsp; &nbsp; &nbsp;
       {isLoggedIn ? (
-        <button
+      <button
           onClick={() => {
             localStorage.removeItem("accessToken");
             navigate("/login");
-            setIsLoggedIn(false);
+            // setIsLoggedIn(false); // was changing in app.jsx
+            dispatch(logout()); // changes in redux user store
           }}
         >
           logout

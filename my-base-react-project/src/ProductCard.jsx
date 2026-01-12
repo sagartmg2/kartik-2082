@@ -1,8 +1,12 @@
 import React from "react";
 import { Link } from "react-router";
 import Button from "./components/Button";
+import { useSelector } from "react-redux";
 
-export default function ProductCard({ product: el, isLoggedIn }) {
+export default function ProductCard({ product: el }) {
+
+  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+
   return (
     <li className="border rounded-xl hover:shadow-2xl" key={el.id}>
       <Link to={`/products/${el.id}`} className="block p-4 ">

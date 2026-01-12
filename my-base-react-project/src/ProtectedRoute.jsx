@@ -1,10 +1,13 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Navigate, Outlet } from "react-router";
 
-export default function ProtectedRoute({ isLoggedIn }) {
+export default function ProtectedRoute() {
   // const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+
+  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
 
   // let accessToken = localStorage.getItem("accessToken");
 

@@ -5,6 +5,7 @@ import { Link } from "react-router";
 import ProductCard from "./ProductCard";
 
 const Products = ({ isLoggedIn }) => {
+  
   const [searchText, setSearchText] = useState("");
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);

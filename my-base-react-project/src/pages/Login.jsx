@@ -4,8 +4,13 @@ import { FaRegEyeSlash } from "react-icons/fa";
 import Button from "../components/Button";
 import axios from "axios";
 import { useNavigate } from "react-router";
-export default function Login({ setIsLoggedIn }) {
+import { setLogin } from "../redux/slice/userSlice";
+import { useDispatch } from "react-redux";
+
+export default function Login() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   //  showPassowrd usestate
 
   /* 
@@ -64,9 +69,10 @@ export default function Login({ setIsLoggedIn }) {
       )
       .then((res) => {
         console.log(res.data.accessToken);
-        setIsLoggedIn(true);
         localStorage.setItem("accessToken", res.data.accessToken);
+        dispatch(setLogin()); // change in redux userStore
         navigate("/dashboard");
+        // setIsLoggedIn(true); // was changeing in App.jsx
       })
       .catch((err) => {
         console.log(err);
