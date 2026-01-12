@@ -2,8 +2,9 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Button from "./components/Button";
 import { Link } from "react-router";
+import ProductCard from "./ProductCard";
 
-const Products = () => {
+const Products = ({ isLoggedIn }) => {
   const [searchText, setSearchText] = useState("");
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -54,15 +55,7 @@ const Products = () => {
       )}
       <ul className="grid mt-12 gap-4 sm:grid-cols-2  md:grid-cols-3 md:gap-8 lg:grid-cols-4 ">
         {products.map((el) => {
-          return (
-            <li className="border rounded-xl hover:shadow-2xl" key={el.id}>
-              <Link to={`/products/${el.id}`} className="block p-4 ">
-                <img src={el.thumbnail} />
-                <p>{el.title}</p>
-                <p>${el.price}</p>
-              </Link>
-            </li>
-          );
+          return <ProductCard product={el} isLoggedIn={isLoggedIn} />;
         })}
       </ul>
     </>

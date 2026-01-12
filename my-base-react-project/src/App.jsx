@@ -33,7 +33,9 @@ export const App = () => {
     {
       path: "",
       // Component: RootLayout ,
-      element: <RootLayout isLoggedIn={isLoggedIn} />,
+      element: (
+        <RootLayout isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+      ),
       children: [
         {
           path: "",
@@ -53,7 +55,8 @@ export const App = () => {
           children: [
             {
               path: "",
-              Component: Products,
+              // Component: Products,
+              element: <Products isLoggedIn={isLoggedIn} />,
             },
             {
               path: ":productId", // slug

@@ -3,7 +3,12 @@ import { FaMoon } from "react-icons/fa";
 import { LuSun } from "react-icons/lu";
 import { Link, useLocation, useNavigate } from "react-router";
 
-export default function Header({ isLoggedIn, theme, changeTheme }) {
+export default function Header({
+  isLoggedIn,
+  theme,
+  changeTheme,
+  setIsLoggedIn,
+}) {
   // const location  = useLocation();
   // pathname = location.pathname
 
@@ -51,7 +56,7 @@ export default function Header({ isLoggedIn, theme, changeTheme }) {
           onClick={() => {
             localStorage.removeItem("accessToken");
             navigate("/login");
-            
+            setIsLoggedIn(false);
           }}
         >
           logout
