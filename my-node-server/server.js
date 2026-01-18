@@ -2,6 +2,10 @@ const express = require("express");
 // import express from "express"
 const cors = require("cors");
 
+const { checkAuthentication } = require("./middlewares/auth");
+const { checkIsBuyer } = require("./middlewares/role");
+const productRoute = require("./routes/product");
+
 const app = express();
 const PORT = 3000;
 
@@ -21,17 +25,7 @@ function cors(){
 
 app.use(cors());
 app.use(express.json()); // global middleware
-
-const checkAuthentication = (req, res, next) => {
-  console.log("checkAuthentication");
-  //   check token in req.headers and validate it.
-  let loggedIn = false;
-  if (loggedIn) {
-    next();
-  } else {
-    return res.status(401).send({ msg: "unauthenticated" });
-  }
-};
+app.use(productRoute);
 
 // app.use(checkAuthentication); // global middeware
 
@@ -88,26 +82,8 @@ app.get("/api/todos", (req, res) => {
   res.send(todos);
 });
 
-let products = [
-  {
-    title: "mouse",
-    price: 100,
-  },
-];
-
-app.get("/api/products", (req, res) => {
-  // let products = DB::find("products")
-  res.send(products);
-});
-
-app.post("/api/products", (req, res) => {
-  if (!req.body.title || !req.body.price) {
-    return res.status(400).send("title or price missing");
-  }
-
-  console.log("req.body", req.body);
-  products.push(req.body);
-  res.send("product created");
+app.post("/api/carts", checkAuthentication, checkIsBuyer, (req, res) => {
+  res.send("added to cart");
 });
 
 /* route level middelware */
