@@ -9,6 +9,8 @@ const productRoute = require("./routes/product");
 const app = express();
 const PORT = 3000;
 
+const Joi = require("joi");
+
 /*  
 
 function cors(){
@@ -92,6 +94,45 @@ app.get("/api/dashboard", checkAuthentication, (req, res) => {
     total: 101,
     message: "sensitive infomation",
   });
+});
+
+const signupValidationschema = Joi.object({
+  email: Joi.string().email().required(),
+  password: Joi.string().min(10).required(),
+  name: Joi.string().min(3).required(),
+  address: Joi.string(),
+});
+
+app.post("/api/signup", (req, res) => {
+  let result = signupValidationschema.validate(req.body, {
+    abortEarly: false,
+    stripUnknown: false,
+    allowUnknown: true,
+  });
+
+  let errors = result.error?.details.map((el) => ({
+    message: el.message,
+    field: el.context.key,
+  }));
+
+  if (errors) {
+    return res.status(400).send({
+      errors: errors,
+    });
+  }
+
+  res.send("user created.");
+
+  return;
+
+  console.log("signup");
+
+  // validate req.body
+  //  email
+  // password
+  //  name
+  //  address optional
+  // create new user in database.
 });
 
 // start the server
