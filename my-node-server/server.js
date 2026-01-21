@@ -5,6 +5,7 @@ const cors = require("cors");
 const { checkAuthentication } = require("./middlewares/auth");
 const { checkIsBuyer } = require("./middlewares/role");
 const productRoute = require("./routes/product");
+const todosRoute = require("./routes/todo");
 
 const app = express();
 const PORT = 3000;
@@ -28,6 +29,7 @@ function cors(){
 app.use(cors());
 app.use(express.json()); // global middleware
 app.use(productRoute);
+app.use(todosRoute);
 
 // app.use(checkAuthentication); // global middeware
 
@@ -74,14 +76,6 @@ app.use(productRoute);
 
 app.get("/", (req, res) => {
   res.send("welcome to node-api");
-});
-
-app.get("/api/todos", (req, res) => {
-  let todos = [
-    { title: "html", status: false },
-    { title: "css", status: false },
-  ];
-  res.send(todos);
 });
 
 app.post("/api/carts", checkAuthentication, checkIsBuyer, (req, res) => {
