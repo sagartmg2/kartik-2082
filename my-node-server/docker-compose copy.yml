@@ -1,0 +1,23 @@
+services:
+  node:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+
+  postgress:
+    image: postgres:16-alpine
+    container_name: my_postgres_container
+    ports:
+      - "5436:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    volumes:
+    - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

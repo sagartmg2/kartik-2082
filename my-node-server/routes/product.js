@@ -13,7 +13,7 @@ const productCreateValidationSchema = Joi.object({
 let products = [
   {
     title: "mouse",
-    price: 100,
+    price: 100000,
   },
 ];
 

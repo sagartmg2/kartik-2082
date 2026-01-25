@@ -24,6 +24,8 @@ import Setting from "./pages/Setting";
 import ProtectedRoute from "./ProtectedRoute";
 import axios from "axios";
 import PageNotFound from "./pages/PageNotFound";
+import ExpressProducts from "./pages/ExpressProducts";
+import Signup from "./pages/Signup";
 
 export const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -52,12 +54,21 @@ export const App = () => {
           element: <Login setIsLoggedIn={setIsLoggedIn} />,
         },
         {
+          path: "signup",
+          element: <Signup />,
+        },
+        {
           path: "products",
           children: [
             {
               path: "",
               // Component: Products,
-              element: <Products  setCartItemsCount ={ setCartItemsCount} isLoggedIn={isLoggedIn} />,
+              element: (
+                <Products
+                  setCartItemsCount={setCartItemsCount}
+                  isLoggedIn={isLoggedIn}
+                />
+              ),
             },
             {
               path: ":productId", // slug
@@ -68,6 +79,15 @@ export const App = () => {
         {
           path: "counter",
           Component: Counter,
+        },
+        {
+          path: "express",
+          children: [
+            {
+              path: "products",
+              Component: ExpressProducts,
+            },
+          ],
         },
         {
           // Component: ProtectedRoute,

@@ -43,6 +43,9 @@ export default function Header({ theme, changeTheme }) {
         <li>
           <Link to="products">products</Link>
         </li>
+        <li>
+          <Link to="express/products">express/products</Link>
+        </li>
         <li className="relative">
           <Link to="carts">Cart<span className="absolute  top-[-25px] right-[-45px] bg-red-500 text-white h-10 w-10 rounded-full flex justify-center items-center">{cartItemsCount}</span></Link>
         </li>

@@ -8,7 +8,7 @@ import { setLogin } from "../redux/slice/userSlice";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 
-export default function Login() {
+export default function Signup() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -17,62 +17,21 @@ export default function Login() {
     handleSubmit,
     watch,
     formState: { errors },
+    setError,
   } = useForm();
 
   console.log({ errors });
-  /* 
-    CRUD operations
-        C - create
-        R read
-        U udpated
-        D delelete
-
-
-    http request methods
-        POST - create
-        GET - read
-        PUT/PATCH - update
-        DELETE - delete
-
-
-    http status codes
-    2 : success
-        200
-        201
-        203
-        204
-
-    3: redirection
-        304
-        308
-    
-    4:  (client/react side error)
-        400  -- bad request
-        401  -- unauthenticated // not logged in 
-        403  -- unatuthorized  
-        404  -- route not found
-        405  -- route matched but request method 
-        422  -- unprocessable entity : similar to 400
-        429  -- DDOS attack , rate limit 
-
-    5: server side error
-        500 :  server errror : unable to handle codes properly
-        503 :  gateway error 
-        504
-  */
 
   const handleFormSubmit = (data) => {
     axios
       .post(
-        "https://dummyjson.com/auth/login",
+        `${import.meta.env.VITE_SERVER_URL}/signup`,
         {
-          // username: "emilys",
-          // password: "emilyspass",
-          username: data.email,
+          email: data.email,
           password: data.password,
-          expiresInMins: 30,
+          name: data.name,
         },
-        {}
+        {},
       )
       .then((res) => {
         console.log(res.data.accessToken);
@@ -82,25 +41,57 @@ export default function Login() {
         // setIsLoggedIn(true); // was changeing in App.jsx
       })
       .catch((err) => {
-        console.log(err);
+        // setError("email", {
+        //   type: "server",
+        //   message: "email is already required",
+        // });
+        // console.log(err.response.data.errors);
+
+        err.response.data.errors.forEach((fieldErr) => {
+          setError(fieldErr.field, {
+            type: "server",
+            message: fieldErr.message,
+          });
+        });
       });
   };
 
   return (
     <div>
+      <h1>Signup Form {import.meta.env.VITE_SERVER_URL}</h1>
       <form
         className="flex flex-col items-center"
         onSubmit={handleSubmit(handleFormSubmit)}
       >
+        <div className="mb-4">
+          <div>
+            <label htmlFor="name">Name</label>
+          </div>
+          <input
+            id="name"
+            placeholder="name"
+            className="border py-4 px-8"
+            {...register("name", { required: true })}
+          />
+          <div>
+            {errors.name && (
+              <span className="text-red-500">
+                {errors.name.message || "this field is required"}
+              </span>
+            )}
+          </div>
+        </div>
         <div className="mb-4">
           <input
             placeholder="email"
             className="border py-4 px-8"
             {...register("email", { required: true })}
           />
-          {errors.email && (
-            <span>{errors.email.message || "this field is required"}</span>
-          )}
+          <div>
+            {errors.email && (
+              <span>{errors.email.message || "this field is required"}</span>
+            )}
+          </div>
         </div>
         <div className="mb-4 relative inline-block ">
           <input
@@ -114,9 +105,11 @@ export default function Login() {
               minLength: { value: 8, message: "min 8 characters required " },
             })}
           />
-          {errors.password && (
-            <span>{errors.password.message || "This fired is required"}</span>
-          )}
+          <div>
+            {errors.password && (
+              <span>{errors.password.message || "This fired is required"}</span>
+            )}
+          </div>
           <FaRegEye className="absolute right-4 top-4 text-2xl" />
           {/* <FaRegEyeSlash className="absolute right-4 top-4 text-2xl" /> */}
         </div>
