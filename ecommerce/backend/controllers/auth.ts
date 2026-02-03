@@ -1,3 +1,4 @@
+import { resolve } from "node:dns";
 import authService from "../services/authService";
 
 import { Request, Response, NextFunction } from "express";
@@ -29,6 +30,14 @@ const authController = {
   },
   getUser: async (req: Request, res: Response, next: NextFunction) => {
     try {
+      // let promise = await new Promise((resolve, reject) => {
+      //   setTimeout(() => {
+      //     console.log(1);
+      //     resolve("success");
+      //   }, 2000);
+      // });
+      // console.log(222222);
+
       res.send({
         // @ts-ignore
         data: req.user,

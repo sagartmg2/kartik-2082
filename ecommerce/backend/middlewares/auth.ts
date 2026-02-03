@@ -11,10 +11,9 @@ export const checkAuthentication = (req: Request, res: Response, next: any) => {
     if (token) {
       if (process.env.JWT_SECRET) {
         let tokenValid = jwt.verify(token, process.env.JWT_SECRET);
-        console.log(tokenValid);
+        // console.log(tokenValid);
         if (tokenValid) {
           loggedIn = true;
-
           // @ts-ignore
           req.user = tokenValid;
         }
