@@ -41,5 +41,8 @@
     "moduleDetection": "force",
     "skipLibCheck": true,
     "esModuleInterop": true
+  },
+  "ts-node": {
+    "files": true
   }
 }

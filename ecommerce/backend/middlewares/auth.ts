@@ -1,4 +1,4 @@
-import { Router, Request, Response } from "express";
+import { Router, Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 
 export const checkAuthentication = (req: Request, res: Response, next: any) => {
@@ -10,11 +10,15 @@ export const checkAuthentication = (req: Request, res: Response, next: any) => {
 
     if (token) {
       if (process.env.JWT_SECRET) {
-        let tokenValid = jwt.verify(token, process.env.JWT_SECRET);
+        let tokenValid = jwt.verify(token, process.env.JWT_SECRET) as {
+          id: number;
+          firstName: string;
+          lastName: string;
+          isSeller: boolean;
+        };
         // console.log(tokenValid);
         if (tokenValid) {
           loggedIn = true;
-          // @ts-ignore
           req.user = tokenValid;
         }
       }
@@ -25,5 +29,19 @@ export const checkAuthentication = (req: Request, res: Response, next: any) => {
     next();
   } else {
     res.status(401).send("unauthtenticateed");
+  }
+};
+
+export const checkSeller = (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  if (req.user?.isSeller) {
+    next();
+  } else {
+    res.status(403).send({
+      msg: "forbidden",
+    });
   }
 };

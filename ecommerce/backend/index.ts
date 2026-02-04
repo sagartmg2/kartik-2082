@@ -27,6 +27,10 @@ interface User {
   phone: string;
 }
 
+interface User {
+  role?: string;
+}
+
 let user: User = {
   age: 12,
   name: "ram",

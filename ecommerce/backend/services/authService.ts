@@ -6,7 +6,6 @@ import User from "../models/User";
 
 export default {
   getUser: async (req: Request) => {
-    
     // let hashed = await bcrypt.hash(req.body.password, 10);
     // return await User.create({
     //   firstName: req.body.firstName,
@@ -22,7 +21,7 @@ export default {
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       email: req.body.email,
-      role: req.body.role,
+      isSeller: req.body.isSeller,
       password: hashed,
     });
   },
@@ -59,8 +58,8 @@ export default {
       delete userData.updatedAt;
 
       if (process.env.JWT_SECRET) {
-        let token = jwt.sign(userData, process.env.JWT_SECRET,{
-          expiresIn:"7d"
+        let token = jwt.sign(userData, process.env.JWT_SECRET, {
+          expiresIn: "7d",
         });
         console.log(token);
 

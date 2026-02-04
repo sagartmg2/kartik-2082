@@ -19,13 +19,14 @@ function errorHandler(
     let errors = err.errors.map((el) => {
       return {
         field: el.path,
-        mesage: el.message,
+        message: el.message,
       };
     });
     return res.status(400).send({
-      msg: err.message,
+      msg: "Bad Request",
+      // msg: err.message,
       errors,
-      //   errors:err.errors
+      // errors: err.errors,
     });
   }
 

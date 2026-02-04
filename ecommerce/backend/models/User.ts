@@ -18,15 +18,20 @@ const User = sequelize.define(
       unique: true,
       allowNull: false,
     },
-    role: {
-      type: DataTypes.ENUM,
-      values: [SELLER, BUYER],
-      allowNull: false,
+    // role: {
+    //   type: DataTypes.ENUM,
+    //   values: [SELLER, BUYER],
+    //   allowNull: false,
+    // },
+    isSeller: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
     },
     password: {
       type: DataTypes.STRING,
       allowNull: false,
     },
+
     // TODO: add password field
   },
   {
