@@ -1,5 +1,6 @@
 import { Menu, Search, X } from "lucide-react";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import {
   Link,
   NavLink,
@@ -7,8 +8,10 @@ import {
   useParams,
   useSearchParams,
 } from "react-router";
+import type { RootState } from "../redux/store";
 
 function Navbar() {
+  const user = useSelector((root: RootState) => root.user.value.data);
   const [isMenuOpen, setIsMenuOpen] = useState(true);
 
   // useSearchParams
@@ -51,14 +54,14 @@ function Navbar() {
         className={`flex flex-col items-center gap-4 overflow-hidden md:grow md:flex-row md:justify-between ${isMenuOpen ? "max-h-screen" : "max-h-0"}`}
       >
         <ul className="flex flex-col gap-4 md:flex-row">
-          <li>
+          {/* <li>
             <Link
               to="/"
               className={`hover:text-secondary ${location.pathname == "/" ? "text-secondary" : ""}`}
             >
               Home
             </Link>
-          </li>
+          </li> */}
           <NavLink
             to="/"
             className={({ isActive }) =>
@@ -70,9 +73,17 @@ function Navbar() {
           <li>
             <Link to="/products">Products</Link>
           </li>
-          <li>
-            <Link to="/seller/dashboard">Dashboard</Link>
-          </li>
+
+          {user?.isSeller && (
+            <>
+              <li>
+                <Link to="/seller/dashboard">Dashboard</Link>
+              </li>
+              <li>
+                <Link to="/seller/products">My Products</Link>
+              </li>
+            </>
+          )}
         </ul>
         <form>
           <div className="flex">

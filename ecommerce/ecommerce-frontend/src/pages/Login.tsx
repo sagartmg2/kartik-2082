@@ -1,7 +1,7 @@
 import axios from "axios";
 import BreadCrumb from "../components/BreadCrumb";
 import type { FormEvent } from "react";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import notify from "../helpers/notify";
 import { login } from "../redux/slice/userSlice";
 import { useDispatch } from "react-redux";
@@ -17,9 +17,9 @@ export default function LoginPage() {
     const form = e.currentTarget;
     axios
       .post("http://localhost:3000/api/auth/login", {
-        // email: (form.elements.namedItem("email") as HTMLInputElement).value,
+        email: (form.elements.namedItem("email") as HTMLInputElement).value,
         // password: (form.elements.namedItem("email") as HTMLInputElement).value,
-        email: "testing@testing.com",
+        // email: "testing@testing.com",
         password: "password",
       })
       .then((res) => {
@@ -27,7 +27,7 @@ export default function LoginPage() {
         dispatch(login(res.data));
         localStorage.setItem("accessToken", res.data.token);
         notify.success("login successful");
-        // navigate("/");
+        navigate("/");
       })
       .catch((err) => {
         notify.error(err.response.data.msg);
@@ -88,12 +88,12 @@ export default function LoginPage() {
 
                   <p className="pt-3 text-center text-xs text-slate-500">
                     Don't have an Account?
-                    <a
-                      href="#"
+                    <Link
+                      to="/signup"
                       className="ml-1 text-slate-600 hover:text-pink-600"
                     >
                       Create account
-                    </a>
+                    </Link>
                   </p>
                 </form>
               </div>

@@ -6,7 +6,7 @@ export interface UserState {
       firstName: string;
       lastName: string;
       email: string;
-      role: string;
+      isSeller: boolean;
     };
   };
 }
