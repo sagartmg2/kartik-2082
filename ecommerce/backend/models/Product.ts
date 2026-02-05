@@ -5,6 +5,11 @@ import User from "./User";
 const Product = sequelize.define(
   "Product",
   {
+    categoryId:{
+      type:DataTypes.BIGINT
+      //  category id reference
+      // allwo null
+    },
     title: {
       //   type: DataTypes.STRING(25),
       type: DataTypes.STRING,

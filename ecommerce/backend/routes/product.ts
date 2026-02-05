@@ -1,12 +1,9 @@
 import { Router } from "express";
 import { checkAuthentication } from "../middlewares/auth";
+import productController from "../controllers/product";
 
 const router = Router();
 
-router.get("/", (req, res) => {
-  res.send("product fetched..");
-});
-
-
+router.get("/", productController.get);
 
 export default router;
