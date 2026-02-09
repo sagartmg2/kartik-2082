@@ -76,6 +76,38 @@ const productService = {
       order: [order],
     });
   },
+  getSingleProduct: async (req: Request) => {
+    console.log(req.params.id);
+
+    // return await Product.findOne({
+    //   where:{
+    //     id: 26
+    //   },
+    let id = req.params.id as unknown as number ;
+
+    return await Product.findByPk(id, {
+      include: [
+        {
+          model: User,
+          as: "seller",
+          attributes: ["id", "email"],
+        },
+        {
+          model: Category,
+          as: "categories",
+          attributes: ["id", "title"],
+        },
+        {
+          model: ProductImage,
+          as: "images",
+          attributes: ["path"],
+        },
+      ],
+      attributes: {
+        exclude: ["userId", "updatedAt"],
+      },
+    });
+  },
   getSellerProducts: async (req: Request) => {
     return await Product.findAll({
       where: {
@@ -103,7 +135,7 @@ const productService = {
     files?.forEach((file) => {
       // console.log(file.mimetype);
       // @ts-ignore
-      const uniqueSuffix = ate.now() + "-" + Math.round(Math.random() * 1e9);
+      const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
       let pathname = path.join("uploads", uniqueSuffix + file.originalname);
       console.log(pathname);
       fs.writeFileSync(pathname, file.buffer);

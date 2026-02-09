@@ -17,6 +17,16 @@ const productController = {
       next(err);
     }
   },
+  getSingleProduct: async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      let data = await productService.getSingleProduct(req);
+      res.send({
+        data: data,
+      });
+    } catch (err) {
+      next(err);
+    }
+  },
   getSellerProducts: async (
     req: Request,
     res: Response,

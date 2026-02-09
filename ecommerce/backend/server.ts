@@ -13,6 +13,8 @@ const app = express();
 app.use(cors());
 app.use(express.json()); // global middleware
 
+app.use("/uploads", express.static("uploads"));
+
 app.use("/api", appRoutes);
 
 app.get("/", (req, res: Response) => {
