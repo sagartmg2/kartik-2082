@@ -8,6 +8,8 @@ import Dashboard from "../pages/seller/Dashboard";
 import Signup from "../pages/Signup";
 import Products from "../pages/Products";
 import SellerProducts from "../pages/seller/Products";
+import ProductDetail from "../pages/ProductDetail";
+import CreateProduct from "../pages/seller/CreateProduct";
 
 const router = createBrowserRouter([
   {
@@ -17,13 +19,20 @@ const router = createBrowserRouter([
       { path: "/", Component: Home },
       { path: "/login", Component: Login },
       { path: "/signup", Component: Signup },
-      { path: "/products", Component: Products },
+      {
+        path: "/products",
+        children: [
+          { path: "", Component: Products },
+          { path: ":id", Component: ProductDetail },
+        ],
+      },
       {
         path: "/seller",
         Component: ProtectedRoute,
         children: [
           { path: "dashboard", Component: Dashboard },
           { path: "products", Component: SellerProducts },
+          { path: "products/create", Component: CreateProduct },
         ],
       },
       { path: "*", Component: NotFount },

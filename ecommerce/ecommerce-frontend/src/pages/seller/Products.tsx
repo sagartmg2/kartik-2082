@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect } from "react";
+import { Link } from "react-router";
 
 export default function Products() {
   //   useEffect(() => {
@@ -17,5 +18,25 @@ export default function Products() {
       .then((res) => {})
       .catch((err) => {});
   }, []);
-  return <div>Seller Products</div>;
+  return (
+    <div className="container">
+      <div>
+        <Link to="/seller/products/create" className="bg-secondary text-white py-2 px-4">Add Product</Link>
+        <ul>
+          <li>one</li>
+          <li>one</li>
+          <li>one</li>
+          <li>one</li>
+          <li>one</li>
+          <li>one</li>
+          <li>one</li>
+          <li>one</li>
+          <li>one</li>
+          <li>one</li>
+          <li>one</li>
+      <li>one</li>
+        </ul>
+      </div>
+    </div>
+  );
 }

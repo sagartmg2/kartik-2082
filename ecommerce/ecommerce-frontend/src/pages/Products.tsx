@@ -1,5 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import NoImageFound from "../assets/noImageFound.png";
+import { genFullUrl } from "../helpers/genFullUrl";
+import { Link } from "react-router";
 
 interface Category {
   id: number;
@@ -24,11 +27,14 @@ const CategoryItem = ({ el }: { el: Category }) => {
 
 function Products() {
   const [categories, setCategories] = useState<Category[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/api/products")
-      .then((res) => {})
+      .get("http://localhost:3000/api/products?limit=100")
+      .then((res) => {
+        setProducts(res.data.data);
+      })
       .catch((err) => {});
 
     axios
@@ -61,7 +67,30 @@ function Products() {
               </ul>
             </div>
           </div>
-          <div className="col-span-5">products display</div>
+          <div className="col-span-5">
+            <ul className="md: grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              {products.map((el) => {
+                return (
+                  <li className="border p-4">
+                    <Link to={`/products/${el.id}`}>
+                      <img
+                        src={
+                          genFullUrl(
+                            el.images.length > 0 ? el.images[0].path : null,
+                          ) || NoImageFound
+                        }
+                        className="mb-2 h-45 w-full object-cover"
+                      />
+                      <p className="text-2xl">{el.title}</p>
+                      <p>Rs.{el.price}</p>
+                      <p>stock: {el.stock}</p>
+                      <p>{el.description}</p>
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
         </div>
       </div>
     </div>
