@@ -25,10 +25,12 @@ function Header() {
           </div>
 
           <div className="flex justify-between gap-2">
-            {user?.firstName && <span>{user?.firstName +" "+ user?.lastName}</span>}
+            {user?.firstName && (
+              <span>{user?.firstName + " " + user?.lastName}</span>
+            )}
             {user ? (
               <div
-              className="flex gap-1"
+                className="flex gap-1"
                 onClick={() => {
                   dispatch(logout());
                 }}
@@ -43,10 +45,10 @@ function Header() {
               </Link>
             )}
 
-            <div className="flex">
+            <Link to={"/cart"} className="flex">
               <ShoppingCart />
               <span>Cart</span>
-            </div>
+            </Link>
           </div>
         </div>
       </div>

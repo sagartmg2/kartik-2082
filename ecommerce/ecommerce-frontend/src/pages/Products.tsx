@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import NoImageFound from "../assets/noImageFound.png";
 import { genFullUrl } from "../helpers/genFullUrl";
 import { Link } from "react-router";
+import cartApi from "../api/cart.api";
 
 interface Category {
   id: number;
@@ -85,6 +86,16 @@ function Products() {
                       <p>Rs.{el.price}</p>
                       <p>stock: {el.stock}</p>
                       <p>{el.description}</p>
+                      <button
+                        className="bg-secondary p-4 text-white"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          e.preventDefault();
+                          cartApi.create({ productId: el.id });
+                        }}
+                      >
+                        Add To Cart
+                      </button>
                     </Link>
                   </li>
                 );
