@@ -6,11 +6,72 @@ import { checkAuthentication, checkSeller } from "../middlewares/auth";
 import SellerRoutes from "./seller";
 import Category from "../models/Category";
 import { title } from "node:process";
+import Cart from "../models/Cart";
+import Product from "../models/Product";
+import User from "../models/User";
 const router = Router();
 
 router.use("/auth", authRoute);
 
 router.use("/products", productRoute);
+
+router.post("/carts", checkAuthentication, async (req, res, next) => {
+  try {
+    let existingCartItem = await Cart.findOne({
+      where: {
+        userId: req.user?.id,
+        productId: req.body.productId,
+      },
+    });
+
+    if (existingCartItem) {
+      await existingCartItem.update({
+        quantity: existingCartItem.getDataValue("quantity") + 1,
+      });
+    } else {
+      let data = await Cart.create({
+        userId: req.user?.id,
+        productId: req.body.productId,
+        quantity: 1,
+      });
+    }
+
+    res.send({
+      data: {
+        msg: "cart updated",
+      },
+    });
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.get("/carts", checkAuthentication, async (req, res, next) => {
+  try {
+    let data = await Cart.findAll({
+      include: {
+        model: Product,
+        as: "product",
+        include: [
+          {
+            model: User,
+            as: "seller",
+            attributes:["id","firstName"]
+          },
+        ],
+      },
+      where: {
+        userId: req.user?.id,
+      },
+    });
+
+    res.send({
+      data: data,
+    });
+  } catch (err) {
+    next(err);
+  }
+});
 
 router.post("/categories", async (req, res, nex) => {
   let data = await Category.create({

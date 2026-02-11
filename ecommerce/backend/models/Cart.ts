@@ -1,8 +1,8 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../connections/database";
 
-const Category = sequelize.define(
-  "Category",
+const Cart = sequelize.define(
+  "Cart",
   {
     userId: {
       type: DataTypes.BIGINT,
@@ -10,13 +10,27 @@ const Category = sequelize.define(
         model: "users",
         key: "id",
       },
+      allowNull: false,
+    },
+    productId: {
+      type: DataTypes.BIGINT,
+      references: {
+        model: "products",
+        key: "id",
+      },
+      allowNull: false,
+    },
+    quantity: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+      allowNull: false,
     },
   },
   {
-    tableName: "categories",
+    tableName: "carts",
     underscored: true,
     timestamps: true,
   },
 );
 
-export default Category;
+export default Cart;
