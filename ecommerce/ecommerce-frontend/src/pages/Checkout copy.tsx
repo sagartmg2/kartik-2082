@@ -92,8 +92,8 @@ export default function Checkout() {
         createField("product_code", product_code);
         createField("product_service_charge", 0);
         createField("product_delivery_charge", 0);
-        createField("success_url", `http://localhost:5173/order/success`);
-        createField("failure_url", "http://developer.esewa.com.np/failure");
+        createField("success_url", `https://localhost:5173/order/success`);
+        createField("failure_url", "https://developer.esewa.com.np/failure");
         createField("signed_field_names", signed_field_names);
         createField("signature", signature);
 

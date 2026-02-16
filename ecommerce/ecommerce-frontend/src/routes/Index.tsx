@@ -12,6 +12,7 @@ import ProductDetail from "../pages/ProductDetail";
 import CreateProduct from "../pages/seller/CreateProduct";
 import Cart from "../pages/Cart";
 import Checkout from "../pages/Checkout";
+import OrderVerification from "../pages/OrderVerification";
 
 const router = createBrowserRouter([
   {
@@ -33,7 +34,9 @@ const router = createBrowserRouter([
         Component: ProtectedRoute,
         children: [
           { path: "/cart", Component: Cart },
-          { path: "/checkout", Component: Checkout }
+          { path: "/checkout", Component: Checkout },
+          // { path: "/order", Component: orders },
+          { path: "/order/success", Component: OrderVerification },
         ],
       },
 

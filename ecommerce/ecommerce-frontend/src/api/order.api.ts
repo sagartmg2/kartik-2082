@@ -13,11 +13,9 @@ const orderApi = {
   delete: (cartId: number) => {
     return api.delete(`/carts/${cartId}`);
   },
-  //   create: (data: { productId: number }) => {
-  //     return api.post("/carts",{
-  //         data :data
-  //     });
-  //   },
+  verification: (payload: { token: string }) => {
+    return api.post(`/orders/verification`, payload);
+  },
 };
 
 export const getCartItems = () => {
