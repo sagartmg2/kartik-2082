@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { Response, Router } from "express";
 
 import authRoute from "./auth";
 import productRoute from "./product";
@@ -13,6 +13,8 @@ import Order from "../models/Order";
 import OrderItem from "../models/OrderItem";
 const router = Router();
 import crypto from "crypto";
+import axios from "axios";
+import { Op } from "sequelize";
 
 router.use("/auth", authRoute);
 
@@ -129,7 +131,7 @@ interface OrderItem {
 const genEsewaSignature = (totalAmout: number, uuid: string) => {
   const message = `total_amount=${totalAmout},transaction_uuid=${uuid},product_code=EPAYTEST`;
   const hashInBase64 = crypto
-    .createHmac("sha256", "8gBm/:&EnhH.1/q")
+    .createHmac("sha256", process.env.ESEWA_SECRET as string)
     .update(message)
     .digest("base64");
 
@@ -162,6 +164,10 @@ router.post("/orders", checkAuthentication, async (req, res, next) => {
       productName: product?.getDataValue("title"),
       productDescription: product?.getDataValue("shortDescription"),
     });
+
+    product?.update({
+      quantity: orderItem.quantity,
+    });
   }
 
   res.send({
@@ -181,21 +187,74 @@ router.post("/orders", checkAuthentication, async (req, res, next) => {
   });
 });
 
+router.get("/orders", checkAuthentication, async (req, res: Response, next) => {
+  Order.findAll({
+    where: {
+      status: "pending",
+    },
+  });
+});
 
-// router.post("/orders/:reference",{
+router.get(
+  "/orders/history",
+  checkAuthentication,
+  async (req, res: Response, next) => {
+    Order.findAll({
+      where: {
+        status: {
+          [Op.in]: ["done", "rejected", "refund"],
+        },
+      },
+    });
+  },
+);
 
-//   // https://rc.esewa.com.np/api/epay/transaction/status/?product_code=EPAYTEST&total_amount=100&transaction_uuid=123
+router.post("/orders/verification", async (req, res: Response, next) => {
+  let token = req.body.token.trim();
 
-//   // order.findOne({
-//   //   referecen: reference
-//   // })
+  const decoded = Buffer.from(decodeURIComponent(token), "base64").toString(
+    "utf8",
+  );
 
-//   // order.update({
-//   //   payment_status:"done"
-//   // })
+  const json = JSON.parse(decoded);
+  console.log(json);
 
+  try {
+    let response = await axios.get(
+      `${process.env.ESEWA_VERIFICATION_URL}?product_code=EPAYTEST&total_amount=${json.total_amount}&transaction_uuid=${json.transaction_uuid}`,
+    );
 
-// })
+    if (response.data.status == "COMPLETE") {
+      let order = await Order.findOne({
+        where: {
+          reference: json.transaction_uuid,
+        },
+      });
+      console.log(order);
+
+      await order?.update({
+        paymentStatus: "done",
+      });
+    }
+    res.send({
+      msg: "success",
+    });
+  } catch (err) {}
+
+  // axios
+  //   .get(
+  //     `${process.env.ESEWA_VERIFICATION_URL}?product_code=EPAYTEST&total_amount=${json.total_amount}&transaction_uuid=${json.transaction_uuid}`,
+  //   )
+  //   .then(async(res) => {
+  //     console.log(res.data);
+
+  //   });
+
+  // const cleanBase64 = token.replace(/\s+/g, "");
+  // const decodedString = Buffer.from(cleanBase64, "base64").toString("utf8");
+  // const json = JSON.parse(decodedString);
+  // console.log(json);
+});
 
 router.post("/categories", async (req, res, nex) => {
   let data = await Category.create({
