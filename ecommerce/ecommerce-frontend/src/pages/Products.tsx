@@ -4,6 +4,7 @@ import NoImageFound from "../assets/noImageFound.png";
 import { genFullUrl } from "../helpers/genFullUrl";
 import { Link } from "react-router";
 import cartApi from "../api/cart.api";
+import api from "../api/axios";
 
 interface Category {
   id: number;
@@ -31,15 +32,15 @@ function Products() {
   const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:3000/api/products?limit=100")
+    api
+      .get(`/products?limit=100`)
       .then((res) => {
         setProducts(res.data.data);
       })
       .catch((err) => {});
 
-    axios
-      .get("http://localhost:3000/api/categories")
+    api
+      .get("/categories")
       .then((res) => {
         setCategories(res.data.data);
       })
