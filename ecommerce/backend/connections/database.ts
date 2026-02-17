@@ -1,6 +1,6 @@
 import { Sequelize } from "sequelize";
 const sequelize = new Sequelize(
-  "postgres://postgres:postgres@localhost:5436/postgres",
+  "postgresql://neondb_owner:npg_kyIz6LmUPSi9@ep-cold-mud-a1zyb2up-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require",
   {
     logging: false,
   },
