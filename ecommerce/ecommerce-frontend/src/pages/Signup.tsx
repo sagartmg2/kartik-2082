@@ -5,6 +5,7 @@ import { useNavigate } from "react-router";
 import notify from "../helpers/notify";
 import { login } from "../redux/slice/userSlice";
 import { useDispatch } from "react-redux";
+import api from "../api/axios";
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -23,8 +24,8 @@ export default function Signup() {
     setErrors([]);
 
     const form = e.currentTarget;
-    axios
-      .post("http://localhost:3000/api/auth/signup", {
+    api
+      .post("/auth/signup", {
         email: (form.elements.namedItem("email") as HTMLInputElement).value,
         password: (form.elements.namedItem("password") as HTMLInputElement)
           .value,

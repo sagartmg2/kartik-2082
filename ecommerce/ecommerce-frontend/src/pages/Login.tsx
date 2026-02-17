@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router";
 import notify from "../helpers/notify";
 import { login } from "../redux/slice/userSlice";
 import { useDispatch } from "react-redux";
+import api from "../api/axios";
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -15,8 +16,7 @@ export default function LoginPage() {
     e.preventDefault();
 
     const form = e.currentTarget;
-    axios
-      .post("http://localhost:3000/api/auth/login", {
+    api.post("/auth/login", {
         email: (form.elements.namedItem("email") as HTMLInputElement).value,
         // password: (form.elements.namedItem("email") as HTMLInputElement).value,
         // email: "testing@testing.com",
